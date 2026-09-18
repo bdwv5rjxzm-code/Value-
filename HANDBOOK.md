@@ -16,8 +16,8 @@ Every verdict records the rubric version beside the model inputs, or it is not r
 ## 0. Session bootstrap
 
 ```bash
-git clone --depth 1 <repo> buffett && cd buffett
-python3 -m pytest tests buffett-verdict/tests -q     # ~1s, proves the clone is intact
+git clone --depth 1 https://github.com/bdwv5rjxzm-code/Value-.git v && cd v
+python3 -m pytest test_regression.py test_rubric.py -q     # ~1s, proves the clone is intact
 ```
 
 Baselines pinned at rf 4.79%, ERP 4.5%, terminal growth 2.5%, MoS 25%,
@@ -244,7 +244,7 @@ audit trail is actually wanted.
 ## 6. Compute the verdict
 
 ```bash
-python3 buffett-verdict/scripts/score.py --understand N --moat N --financials N \
+python3 score.py --understand N --moat N --financials N \
   --management N --value-per-share V --price P [--p90 X] [--oe-yield Y --rf R] \
   [--gate "reason"] [--substitution "…"]
 ```

@@ -10,8 +10,12 @@ import sys
 
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(
-    os.path.abspath(__file__))), "scripts"))
+# Layout-agnostic: score.py may sit beside this file (flat repo) or in ../scripts.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+for _c in (_HERE, os.path.join(os.path.dirname(_HERE), "scripts")):
+    if os.path.exists(os.path.join(_c, "score.py")):
+        sys.path.insert(0, _c)
+        break
 
 from score import price_score, verdict  # noqa: E402
 

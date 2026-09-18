@@ -6,8 +6,8 @@ Damodaran mechanics, Buffett discipline. Two layers, both reported: the model an
 ## Start a session
 
 ```bash
-git clone --depth 1 <this repo> buffett && cd buffett
-python3 -m pytest tests buffett-verdict/tests -q
+git clone --depth 1 https://github.com/bdwv5rjxzm-code/Value-.git v && cd v
+python3 -m pytest test_regression.py test_rubric.py -q
 ```
 
 Thirty-five tests, about a second. They pin five valuation baselines and the verdict
@@ -27,21 +27,20 @@ python3 hybrid_valuation.py --from-cache BABA --price 111.64 \
   --beta-u 1.20 --crp 0.6 --spread 1.25 --mature-spread 1.0 \
   --derive-terminal-roic --mos 25
 
-python3 buffett-verdict/scripts/score.py --understand 2 --moat 3 --financials 3 \
+python3 score.py --understand 2 --moat 3 --financials 3 \
   --management 3 --value-per-share 88.27 --price 111.64 --p90 106.31
 ```
 
 ## Layout
 
 ```
-hybrid_valuation.py          the model
-fundamentals.py              point-in-time observables cache (data/<TICKER>/<FY>.json)
-tests/test_regression.py     pinned valuation baselines and guardrails
-buffett-verdict/
-  scripts/score.py           price score, caps, gates, floors, verdict matrix
-  tests/test_rubric.py       matrix and bands pinned against the assessment register
-HANDBOOK.md                  operational reference — read every session
-RATIONALE.md                 why it is shaped this way — read only when changing it
+hybrid_valuation.py    the model
+score.py               price score, caps, gates, floors, verdict matrix
+fundamentals.py        point-in-time observables cache (data/<TICKER>/<FY>.json)
+test_regression.py     pinned valuation baselines and guardrails
+test_rubric.py         matrix and bands pinned against the assessment register
+HANDBOOK.md            operational reference — read every session
+RATIONALE.md           why it is shaped this way — read only when changing it
 ```
 
 ## Why this is a repo and not project knowledge

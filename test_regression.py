@@ -8,8 +8,14 @@ held flat into the terminal margin (a 21% error).
 """
 import subprocess, json, sys, os, pytest
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SCRIPT = os.path.join(ROOT, "hybrid_valuation.py")
+# Layout-agnostic: the model may sit beside this file (flat repo) or one level up
+# (tests/ subdirectory). Resolve rather than assume, so a re-upload that flattens the
+# tree does not silently break the baselines.
+_HERE = os.path.dirname(os.path.abspath(__file__))
+SCRIPT = next(c for c in (os.path.join(_HERE, "hybrid_valuation.py"),
+                          os.path.join(os.path.dirname(_HERE), "hybrid_valuation.py"))
+              if os.path.exists(c))
+ROOT = os.path.dirname(SCRIPT)
 
 COMMON = ["--rf", "4.79", "--erp", "4.5", "--terminal-growth", "2.5",
           "--mos", "25", "--derive-terminal-roic", "--json"]
